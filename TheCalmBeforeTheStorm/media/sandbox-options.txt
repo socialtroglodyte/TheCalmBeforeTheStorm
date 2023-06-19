@@ -1,0 +1,229 @@
+VERSION = 1,
+
+option CBTS.SoundType {
+    type = enum,
+    numValues = 3,
+    default = 3,
+    page = CalmBeforeTheStorm,
+    translation = SoundType,
+}
+
+option CBTS.MinutesBetweenZombieCalls
+{
+    type = integer,
+    min = 1,
+    max = 5256000,
+    default = 1,
+    page = CalmBeforeTheStorm,
+    translation = MinutesBetweenZombieCalls,
+}
+
+option CBTS.HordeRadius 
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 200,
+    page = CalmBeforeTheStorm,
+    translation = HordeRadius,
+}
+
+option CBTS.HordeDistance 
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 200,
+    page = CalmBeforeTheStorm,
+    translation = HordeDistance,
+}
+
+option CBTS.CooldownPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 168.0,
+    page = CalmBeforeTheStorm,
+    translation = CooldownPhaseDuration,
+}
+
+option CBTS.CalmPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 24.0,
+    page = CalmBeforeTheStorm,
+    translation = CalmPhaseDuration,
+}
+
+option CBTS.StormPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 6.0,
+    page = CalmBeforeTheStorm,
+    translation = StormPhaseDuration,
+}
+
+option CBTS.RandomDurationFlag 
+{
+    type = boolean,
+    default = false,
+    page = CalmBeforeTheStorm,
+    translation = RandomDurationFlag,
+}
+
+option CBTS.MinCooldownPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 168.0,
+    page = CalmBeforeTheStorm,
+    translation = MinCooldownPhaseDuration,
+}
+
+option CBTS.MaxCooldownPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 168.0,
+    page = CalmBeforeTheStorm,
+    translation = MaxCooldownPhaseDuration,
+}
+
+option CBTS.MinCalmPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 24.0,
+    page = CalmBeforeTheStorm,
+    translation = MinCalmPhaseDuration,
+}
+
+option CBTS.MaxCalmPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 24.0,
+    page = CalmBeforeTheStorm,
+    translation = MaxCalmPhaseDuration,
+}
+
+option CBTS.MinStormPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 6.0,
+    page = CalmBeforeTheStorm,
+    translation = MinStormPhaseDuration,
+}
+
+option CBTS.MaxStormPhaseDuration 
+{
+    type = double,
+    min = 0.0,
+    max = 87600.0,
+    default = 6.0,
+    page = CalmBeforeTheStorm,
+    translation = MaxStormPhaseDuration,
+}
+
+option CBTS.EnableLogging 
+{
+    type = boolean,
+    default = false,
+    page = CalmBeforeTheStorm,
+    translation = EnableLogging,
+}
+
+option CBTS.DebugMinutesToUpdateConsole 
+{
+    type = integer,
+    min = 1,
+    max = 1440,
+    default = 1,
+    page = CalmBeforeTheStorm,
+    translation = DebugMinutesToUpdateConsole,
+}
+
+option CBTS.MigrateToNorth {
+    	type = boolean,
+    	default = true,
+    	page = CalmBeforeTheStorm,
+    	translation = Sandbox_MigrateToNorth
+}
+
+option CBTS.MigrateToNorthEast {
+    	type = boolean,
+    	default = true,
+    	page = CalmBeforeTheStorm,
+    	translation = Sandbox_MigrateToNorthEast
+}
+
+option CBTS.MigrateToEast {
+    	type = boolean,
+    	default = true,
+    	page = CalmBeforeTheStorm,
+    	translation = Sandbox_MigrateToEast
+}
+
+option CBTS.MigrateToSouthEast {
+    	type = boolean,
+    	default = true,
+    	page = CalmBeforeTheStorm,
+    	translation = Sandbox_MigrateToSouthEast
+}
+
+option CBTS.MigrateToSouth {
+    	type = boolean,
+    	default = true,
+    	page = CalmBeforeTheStorm,
+    	translation = Sandbox_MigrateToSouth
+}
+
+option CBTS.MigrateToSouthWest {
+    	type = boolean,
+    	default = true,
+    	page = CalmBeforeTheStorm,
+    	translation = Sandbox_MigrateToSouthWest
+}
+
+option CBTS.MigrateToWest {
+    	type = boolean,
+    	default = true,
+    	page = CalmBeforeTheStorm,
+    	translation = Sandbox_MigrateToWest
+}
+
+option CBTS.MigrateToNorthWest {
+    	type = boolean,
+    	default = true,
+    	page = CalmBeforeTheStorm,
+    	translation = Sandbox_MigrateToNorthWest
+}
+
+option CBTS.MaxNumChasingZombies {
+    type = integer,
+    min = 0,
+    max = 1000000,
+    default = 0,
+    page = CalmBeforeTheStorm,
+    translation = MaxNumChasingZombies,
+}
+
+option CBTS.PlayerPositionOffset {
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 0,
+    page = CalmBeforeTheStorm,
+    translation = PlayerPositionOffset,
+}
