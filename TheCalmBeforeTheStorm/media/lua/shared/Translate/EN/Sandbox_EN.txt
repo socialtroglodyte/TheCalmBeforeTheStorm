@@ -45,10 +45,10 @@ Sandbox_EN = {
 	Sandbox_DebugMinutesToUpdateConsole = "Console Output Delay",
 	Sandbox_DebugMinutesToUpdateConsole_tooltip = "Updates every specified in-game minutes. This is for server owners wanting to prevent clutter from flooding the console.",
 
-	Sandbox_MaxNumChasingZombies = "Maximum Number Of Chasing Zombies Per Player",
+	Sandbox_MaxNumChasingZombies = "Maximum Chasing Zombies Per Player",
 	Sandbox_MaxNumChasingZombies_tooltip = "The minimum number of zombies that can chase you before zombies lose their omniscience. If zero, this option is ignored.",
 
-	Sandbox_PlayerPositionOffset = "Horde Scatteredness",
+	Sandbox_PlayerPositionOffset = "Horde Density",
 	Sandbox_PlayerPositionOffset_tooltip = "Offsets the target position relative to the player by a random value between zero and the specified value. This makes hordes look less clumped together and more uncoordinated.",
 
 	Sandbox_MigrateToNorth = "Migrate To North",
@@ -67,18 +67,18 @@ Sandbox_EN = {
 	Sandbox_MigrateToNorthEast_tooltip = "Allows zombies to migrate north-east of the player.",
 
 	Sandbox_MigrateToSouthEast = "Migrate To South-East",
-    Sandbox_MigrateToSouthEast_tooltip = "Allows zombies to migrate south-east of the player.",
+    	Sandbox_MigrateToSouthEast_tooltip = "Allows zombies to migrate south-east of the player.",
 
-    Sandbox_MigrateToNorthWest = "Migrate To North-West",
-    Sandbox_MigrateToNorthWest_tooltip = "Allows zombies to migrate north-west of the player.",
+    	Sandbox_MigrateToNorthWest = "Migrate To North-West",
+    	Sandbox_MigrateToNorthWest_tooltip = "Allows zombies to migrate north-west of the player.",
 
-    Sandbox_MigrateToSouthWest = "Migrate To South-West",
-    Sandbox_MigrateToSouthWest_tooltip = "Allows zombies to migrate south-west of the player.",
+    	Sandbox_MigrateToSouthWest = "Migrate To South-West",
+    	Sandbox_MigrateToSouthWest_tooltip = "Allows zombies to migrate south-west of the player.",
 
-    Sandbox_SoundType = "Sounds",
-    Sandbox_SoundType_option1 = "Disabled",
-    Sandbox_SoundType_option2 = "Legacy",
-    Sandbox_SoundType_option3 = "Default"
+    	Sandbox_SoundType = "Sounds",
+    	Sandbox_SoundType_option1 = "Disabled",
+    	Sandbox_SoundType_option2 = "Legacy",
+    	Sandbox_SoundType_option3 = "Default"
 }
 
 
