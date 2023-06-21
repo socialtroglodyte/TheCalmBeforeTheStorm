@@ -1,5 +1,5 @@
 This mod adds an event that takes some inspiration from the "You Have One Day" challenge. Zombies migrate away from the player and form massive hordes, which, after a certain period of time, return to hunt the player. This mod is intended to work for both singleplayer and multiplayer. This will work on both new and existing saves.
-()[https://imgur.com/G63Hq7v.png]
+
 The event cycles through three phases:
 
 - The Cooldown Phase - The time between events. Gameplay is normal and zombies will behave as usual.
