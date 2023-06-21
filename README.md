@@ -9,3 +9,5 @@ The event cycles through three phases:
 Note that unlike mods such as Horde Night and Here They Come, this does not spawn any zombies, but rather moves the existing ones in the world to form hordes.
 
 The mod is very customizable through the custom sandbox menu and allows you to adjust the duration of each phase, as well as the radius and distance of the horde. If you are adjusting the phase durations mid-game, the changes will take effect after the storm phase concludes.
+
+[Download On Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2953621037)
