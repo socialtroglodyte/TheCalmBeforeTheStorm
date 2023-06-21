@@ -69,12 +69,13 @@ local function CalmPhase()
     if getPlayer():isAlive() and getPlayer() ~= nil then
 
         local CurrentSquare = getPlayer():getCurrentSquare()
-        local x1 = CurrentSquare:getX() + HordeDistance
-        local y1 = CurrentSquare:getY() + HordeDistance
-        local x2 = CurrentSquare:getX() - HordeDistance
-        local y2 = CurrentSquare:getY() - HordeDistance
 
         if CurrentSquare then
+
+            local x1 = CurrentSquare:getX() + HordeDistance
+            local y1 = CurrentSquare:getY() + HordeDistance
+            local x2 = CurrentSquare:getX() - HordeDistance
+            local y2 = CurrentSquare:getY() - HordeDistance
 
             if MigrationDirection.North then
                 MakeNoise(CurrentSquare:getX(), y2, HordeRadius)
@@ -126,7 +127,7 @@ end
 
 local function StormPhase()
     if getPlayer():isAlive() and getPlayer() ~= nil then
-        local CurrentSquare = getPlayer():getCurrentSquare()
+        local CurrentSquare = getPlayer():getCurrentSquare() or 0
 
         if CurrentSquare then
             if MaxNumChasingZombies > 0 then
@@ -161,15 +162,16 @@ local function PlayStormSounds()
     if Player:isAlive() and Player ~= nil then
 
         if SoundType == 3 then
+
             local CurrentSquare = Player:getCurrentSquare()
-            local x1 = CurrentSquare:getX() + HordeDistance
-            local y1 = CurrentSquare:getY() + HordeDistance
-            local x2 = CurrentSquare:getX() - HordeDistance
-            local y2 = CurrentSquare:getY() - HordeDistance
-
             BaseSoundManager:PlaySound("Rumble", false, 0.01)
-
+            
             if CurrentSquare then
+                local x1 = CurrentSquare:getX() + HordeDistance
+                local y1 = CurrentSquare:getY() + HordeDistance
+                local x2 = CurrentSquare:getX() - HordeDistance
+                local y2 = CurrentSquare:getY() - HordeDistance
+
                 local Sound = getWorld():getFreeEmitter()
                 Sound:setVolume(0, 1.0)
                 Sound:setPos(x1, y1, 0)
@@ -194,14 +196,6 @@ local function PlayStormSounds()
         end
     end
 end
-
---[[
-local sound = getWorld():getFreeEmitter()
-sound:setPos(getPlayer():getCurrentSquare():getX(), getPlayer():getCurrentSquare():getY(), 0)
-sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
-sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
-]]
-
 
 local function CyclePhases()
 	CycleCounter = CBTSData.Data.Counter 
