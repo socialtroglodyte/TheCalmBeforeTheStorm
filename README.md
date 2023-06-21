@@ -10,4 +10,4 @@ Note that unlike mods such as Horde Night and Here They Come, this does not spaw
 
 The mod is very customizable through the custom sandbox menu and allows you to adjust the duration of each phase, as well as the radius and distance of the horde. If you are adjusting the phase durations mid-game, the changes will take effect after the storm phase concludes.
 
-[Download On Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2953621037)
+[Download](https://steamcommunity.com/sharedfiles/filedetails/?id=2953621037)
