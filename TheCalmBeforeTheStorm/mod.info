@@ -1,4 +1,6 @@
 name=The Calm Before The Storm
 poster=poster.png
+icon=icon.png
 id=CBTS
-description=v1.4
+versionMin=41.78
+modVersion=1.4

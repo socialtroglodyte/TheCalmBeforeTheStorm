@@ -165,7 +165,7 @@ local function PlayStormSounds()
 
             local CurrentSquare = Player:getCurrentSquare()
             BaseSoundManager:PlaySound("Rumble", false, 0.01)
-            
+
             if CurrentSquare then
                 local x1 = CurrentSquare:getX() + HordeDistance
                 local y1 = CurrentSquare:getY() + HordeDistance
