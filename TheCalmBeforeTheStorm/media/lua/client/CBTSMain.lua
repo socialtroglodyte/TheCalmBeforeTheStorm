@@ -1,3 +1,4 @@
+local Utils = require("Utils")
 local DebugPrefix = "[CBTS] " -- This will show at the start of the debug message to help identify mod outputs more easily
 
 local WorldSoundManager = getWorldSoundManager()
@@ -25,11 +26,6 @@ local MigrationDirection = {
     SouthEast = SandboxVars.CBTS.MigrateToSouthEast,
     SouthWest = SandboxVars.CBTS.MigrateToSouthWest
 }
-
-local function RoundFloat(Number, DecimalPlace)
-    local Multiplier = math.pow(10, DecimalPlace)
-    return math.floor(Number * Multiplier + 0.5) / Multiplier
-end
 
 local function UpdateSandboxVars()
     CallZombiesOnce = SandboxVars.CBTS.CallZombiesOnce
@@ -70,6 +66,8 @@ local function MakeNoise(x, y, radius)
 end
 
 local function CalmPhase()
+    if not getPlayer() then return end
+
     if getPlayer():isAlive() and getPlayer() ~= nil then
 
         local CurrentSquare = getPlayer():getCurrentSquare()
@@ -130,6 +128,7 @@ local function CalmPhase()
 end
 
 local function StormPhase()
+    if not getPlayer() then return end
     if getPlayer():isAlive() and getPlayer() ~= nil then
         local CurrentSquare = getPlayer():getCurrentSquare() or 0
 
@@ -176,7 +175,7 @@ local function PlayStormSounds()
                 local x2 = CurrentSquare:getX() - HordeDistance
                 local y2 = CurrentSquare:getY() - HordeDistance
 
-                local WindIntensity = RoundFloat(getClimateManager():getWindIntensity(), 2)
+                local WindIntensity = Utils.RoundFloat(getClimateManager():getWindIntensity(), 2)
                 local Sound = getWorld():getFreeEmitter()
                 Sound:setVolume(WindIntensity, 1.0)
                 Sound:setPos(x1, y1, 0)
