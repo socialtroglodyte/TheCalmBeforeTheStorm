@@ -1,4 +1,3 @@
-require("CBTSData") -- Import cycle counter data
 local DebugPrefix = "[CBTS] " -- This will show at the start of the debug message to help identify mod outputs more easily
 
 local WorldSoundManager = getWorldSoundManager()
@@ -26,6 +25,11 @@ local MigrationDirection = {
     SouthEast = SandboxVars.CBTS.MigrateToSouthEast,
     SouthWest = SandboxVars.CBTS.MigrateToSouthWest
 }
+
+local function RoundFloat(Number, DecimalPlace)
+    local Multiplier = math.pow(10, DecimalPlace)
+    return math.floor(Number * Multiplier + 0.5) / Multiplier
+end
 
 local function UpdateSandboxVars()
     CallZombiesOnce = SandboxVars.CBTS.CallZombiesOnce
@@ -172,19 +176,20 @@ local function PlayStormSounds()
                 local x2 = CurrentSquare:getX() - HordeDistance
                 local y2 = CurrentSquare:getY() - HordeDistance
 
+                local WindIntensity = RoundFloat(getClimateManager():getWindIntensity(), 2)
                 local Sound = getWorld():getFreeEmitter()
-                Sound:setVolume(0, 1.0)
+                Sound:setVolume(WindIntensity, 1.0)
                 Sound:setPos(x1, y1, 0)
-                Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                --Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
                 Sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
                 Sound:setPos(x2, y1, 0)
-                Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                --Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
                 Sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
                 Sound:setPos(x1, y2, 0)
-                Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                --Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
                 Sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
                 Sound:setPos(x2, y2, 0)
-                Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                --Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
                 Sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
             else
                 print(DebugPrefix, "Player CurrentSquare not found. Cancelled PlayStormSounds().")

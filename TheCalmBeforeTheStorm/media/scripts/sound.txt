@@ -51,7 +51,8 @@ module base {
         clip {
             file = media/sound/Wind1.ogg,
             volume = 1,
-            distanceMax = 1500,
+            distanceMax = 10000,
+            reverbFactor = 1.0,
         }
     }
 
@@ -61,7 +62,8 @@ module base {
             clip {
                 file = media/sound/Wind2.ogg,
                 volume = 1,
-                distanceMax = 1500,
+                distanceMax = 10000,
+                reverbFactor = 1.0,
             }
         }
 
@@ -71,7 +73,8 @@ module base {
             clip {
                 file = media/sound/Wind3.ogg,
                 volume = 1,
-                distanceMax = 1500,
+                distanceMax = 10000,
+                reverbFactor = 1.0,
             }
         }
 
@@ -81,7 +84,8 @@ module base {
             clip {
                 file = media/sound/Wind4.ogg,
                 volume = 1,
-               distanceMax = 1500,
+               distanceMax = 10000,
+               reverbFactor = 1.0,
             }
         }
 
@@ -91,7 +95,8 @@ module base {
             clip {
                 file = media/sound/Zombies1.ogg,
                 volume = 1,
-                distanceMax = 1500,
+                distanceMax = 10000,
+                reverbFactor = 1.0,
             }
         }
 
@@ -101,7 +106,8 @@ module base {
                 clip {
                     file = media/sound/Zombies2.ogg,
                     volume = 1,
-                    distanceMax = 1500,
+                    distanceMax = 10000,
+                    reverbFactor = 1.0,
                 }
             }
 
@@ -111,7 +117,8 @@ module base {
                 clip {
                     file = media/sound/Zombies3.ogg,
                     volume = 1,
-                    distanceMax = 1500,
+                    distanceMax = 10000,
+                    reverbFactor = 1.0,
                 }
             }
 
@@ -121,7 +128,8 @@ module base {
                     clip {
                         file = media/sound/Zombies4.ogg,
                         volume = 1,
-                        distanceMax = 1500,
+                        distanceMax = 10000,
+                        reverbFactor = 1.0,
                     }
                 }
 }
