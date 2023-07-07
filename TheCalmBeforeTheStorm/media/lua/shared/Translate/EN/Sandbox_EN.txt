@@ -1,6 +1,9 @@
 Sandbox_EN = {
-	Sandbox_MinutesBetweenZombieCalls = "Zombie Ping Interval",
-	Sandbox_MinutesBetweenZombieCalls_tooltip = "The value between minutes zombies will be alerted to survivors.",
+	Sandbox_MinutesBetweenZombieCalls = "Storm Phase Update Frequency",
+	Sandbox_MinutesBetweenZombieCalls_tooltip = "The amount of minutes in-between each storm phase update.",
+
+	Sandbox_MinutesBetweenCalmPhaseUpdates = "Calm Phase Update Frequency",
+	Sandbox_MinutesBetweenCalmPhaseUpdates_tooltip = "The amount of minutes in-between each calm phase update.",
 	
 	Sandbox_SoundEffects = "Enable Sound Effects",
 	Sandbox_SoundEffects_tooltip = "Allows the sound effects to played at the start of the storm phase.",
@@ -46,7 +49,7 @@ Sandbox_EN = {
 	Sandbox_DebugMinutesToUpdateConsole_tooltip = "Updates every specified in-game minutes. This is for server owners wanting to prevent clutter from flooding the console.",
 
 	Sandbox_MaxNumChasingZombies = "Maximum Zombies Per Player",
-	Sandbox_MaxNumChasingZombies_tooltip = "The minimum number of zombies that can chase you before zombies lose their omniscience. If zero, this option is ignored.",
+	Sandbox_MaxNumChasingZombies_tooltip = "The minimum number of zombies that can chase you before the storm phase stops updating. If zero, this option is ignored.",
 
 	Sandbox_PlayerPositionOffset = "Horde Scatter",
 	Sandbox_PlayerPositionOffset_tooltip = "Offsets the target position relative to the player by a random value between zero and the specified value. This makes hordes look less clumped together and more uncoordinated.",

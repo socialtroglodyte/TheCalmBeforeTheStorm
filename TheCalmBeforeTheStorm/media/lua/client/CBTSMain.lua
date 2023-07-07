@@ -8,13 +8,14 @@ local HordeDistance = SandboxVars.CBTS.HordeDistance
 local CooldownPhaseDuration = SandboxVars.CBTS.CooldownPhaseDuration * 60 + 0.0
 local CalmPhaseDuration = SandboxVars.CBTS.CalmPhaseDuration * 60 + 0.0
 local StormPhaseDuration = SandboxVars.CBTS.StormPhaseDuration * 60 + 0.0
+local MinutesBetweenCalmPhaseUpdates = SandboxVars.CBTS.MinutesBetweenCalmPhaseUpdates
 local MinutesBetweenZombieCalls = SandboxVars.CBTS.MinutesBetweenZombieCalls
 local MaxNumChasingZombies = SandboxVars.CBTS.MaxNumChasingZombies
 local PlayerPositionOffset = SandboxVars.CBTS.PlayerPositionOffset
 local EnableLogging = SandboxVars.CBTS.EnableLogging
 local DebugMinutesToUpdateConsole = SandboxVars.CBTS.DebugMinutesToUpdateConsole
 local SoundType = SandboxVars.CBTS.SoundType
-local CycleCounter  -- Cycle counter variable
+local CycleCounter -- Cycle counter variable
 
 local MigrationDirection = {
     North = SandboxVars.CBTS.MigrateToNorth,
@@ -31,6 +32,7 @@ local function UpdateSandboxVars()
     CallZombiesOnce = SandboxVars.CBTS.CallZombiesOnce
     HordeRadius = SandboxVars.CBTS.HordeRadius
     HordeDistance = SandboxVars.CBTS.HordeDistance
+    MinutesBetweenCalmPhaseUpdates = SandboxVars.CBTS.MinutesBetweenCalmPhaseUpdates
     MinutesBetweenZombieCalls = SandboxVars.CBTS.MinutesBetweenZombieCalls
 	EnableLogging = SandboxVars.CBTS.EnableLogging
     DebugMinutesToUpdateConsole = SandboxVars.CBTS.DebugMinutesToUpdateConsole
@@ -129,25 +131,36 @@ end
 
 local function StormPhase()
     if not getPlayer() then return end
-    if getPlayer():isAlive() and getPlayer() ~= nil then
-        local CurrentSquare = getPlayer():getCurrentSquare() or 0
 
-        if CurrentSquare then
+    if getPlayer():isAlive() and getPlayer() ~= nil then
+        local CurrentSquare = getPlayer():getCurrentSquare()
+        local PlayerX, PlayerY
+
+        if CurrentSquare and PlayerX == nil and PlayerY == nil then
+            PlayerX = CurrentSquare:getX() + ZombRand(-PlayerPositionOffset, PlayerPositionOffset)
+            PlayerY = CurrentSquare:getY() + ZombRand(-PlayerPositionOffset, PlayerPositionOffset)
+        else
+            print(DebugPrefix, "Player CurrentSquare not found. Cancelled storm phase update.")
+        end
+
+        if PlayerX ~= nil and PlayerY ~= nil then
+        --if CurrentSquare then
             if MaxNumChasingZombies > 0 then
-                if getPlayer():getStats():getNumChasingZombies() < MaxNumChasingZombies then
-                    MakeNoise(CurrentSquare:getX(), CurrentSquare:getY(), HordeDistance * 1.5)
+                if CurrentSquare and getPlayer():getStats():getNumChasingZombies() < MaxNumChasingZombies then
+                    MakeNoise(PlayerX, PlayerY, HordeDistance * 1.5)
                 else
                     if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0 and EnableLogging then
                         print(DebugPrefix, "MaxNumChasingZombies value reached. Cancelled storm phase update.")
                     end
                 end
             else
-                MakeNoise(CurrentSquare:getX() + ZombRand(-PlayerPositionOffset, PlayerPositionOffset), CurrentSquare:getY() + ZombRand(-PlayerPositionOffset, PlayerPositionOffset), HordeDistance * 1.5)
+                MakeNoise(PlayerX, PlayerY, HordeDistance * 1.5)
             end
-        else
+        --[[else
             if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0 and EnableLogging then
                 print(DebugPrefix, "Player CurrentSquare not found. Cancelled storm phase update.")
             end
+        end]]
         end
 
         if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0 and EnableLogging then
@@ -216,16 +229,17 @@ local function CyclePhases()
         end
     end
 
-    if (CycleCounter > CooldownPhaseDuration) and (CycleCounter < CooldownPhaseDuration + CalmPhaseDuration) then
-        CalmPhase()
-        if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0  and EnableLogging  then
-            print(DebugPrefix, "The storm phase begins in ",  ((CooldownPhaseDuration + CalmPhaseDuration) - CycleCounter), " in-game minute(s).")
+    if CycleCounter % MinutesBetweenCalmPhaseUpdates == 0 then
+        if (CycleCounter > CooldownPhaseDuration) and (CycleCounter < CooldownPhaseDuration + CalmPhaseDuration) then
+            CalmPhase()
+            if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0  and EnableLogging  then
+                print(DebugPrefix, "The storm phase begins in ",  ((CooldownPhaseDuration + CalmPhaseDuration) - CycleCounter), " in-game minute(s).")
+            end
         end
     end
 
     if CycleCounter == CooldownPhaseDuration + CalmPhaseDuration then
         if StormPhaseDuration > 0.0 then
-            --BaseSoundManager:PlaySound("Hunt" .. ZombRand(1, 4), false, 0.1)
             PlayStormSounds()
         end
     end
@@ -235,20 +249,6 @@ local function CyclePhases()
             StormPhase()
         end
     end
-
-    --[[if not CallZombiesOnce then
-        if (CycleCounter > CooldownPhaseDuration + CalmPhaseDuration) and (CycleCounter < CooldownPhaseDuration + CalmPhaseDuration + StormPhaseDuration) then
-            StormPhase()
-        end
-    else
-        if CycleCounter == CooldownPhaseDuration + CalmPhaseDuration then
-            StormPhase()
-        end
-    end
-
-    Old code using the now-retired 'call zombies once' option
-
-    ]]
 
     if CycleCounter == CooldownPhaseDuration + CalmPhaseDuration then
         if getPlayer():isAsleep() then
