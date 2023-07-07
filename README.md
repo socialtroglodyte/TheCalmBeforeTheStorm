@@ -20,4 +20,4 @@ The mod is very customizable through the custom sandbox menu and allows you to a
 
 [Download](https://steamcommunity.com/sharedfiles/filedetails/?id=2953621037)
 
-[Download Latest Release](https://github.com/socialtroglodyte/TheCalmBeforeTheStorm/releases)
+[Download Latest Beta](https://github.com/socialtroglodyte/TheCalmBeforeTheStorm/releases)
