@@ -1,4 +1,4 @@
-local Utils = require("Utils")
+--local Utils = require("Utils")
 local DebugPrefix = "[CBTS] " -- This will show at the start of the debug message to help identify mod outputs more easily
 
 local WorldSoundManager = getWorldSoundManager()
@@ -10,7 +10,7 @@ local CalmPhaseDuration = SandboxVars.CBTS.CalmPhaseDuration * 60 + 0.0
 local StormPhaseDuration = SandboxVars.CBTS.StormPhaseDuration * 60 + 0.0
 local MinutesBetweenCalmPhaseUpdates = SandboxVars.CBTS.MinutesBetweenCalmPhaseUpdates
 local MinutesBetweenZombieCalls = SandboxVars.CBTS.MinutesBetweenZombieCalls
-local MaxNumChasingZombies = SandboxVars.CBTS.MaxNumChasingZombies
+--local MaxNumChasingZombies = SandboxVars.CBTS.MaxNumChasingZombies
 local PlayerPositionOffset = SandboxVars.CBTS.PlayerPositionOffset
 local EnableLogging = SandboxVars.CBTS.EnableLogging
 local DebugMinutesToUpdateConsole = SandboxVars.CBTS.DebugMinutesToUpdateConsole
@@ -34,9 +34,9 @@ local function UpdateSandboxVars()
     HordeDistance = SandboxVars.CBTS.HordeDistance
     MinutesBetweenCalmPhaseUpdates = SandboxVars.CBTS.MinutesBetweenCalmPhaseUpdates
     MinutesBetweenZombieCalls = SandboxVars.CBTS.MinutesBetweenZombieCalls
-	EnableLogging = SandboxVars.CBTS.EnableLogging
+    EnableLogging = SandboxVars.CBTS.EnableLogging
     DebugMinutesToUpdateConsole = SandboxVars.CBTS.DebugMinutesToUpdateConsole
-    MaxNumChasingZombies = SandboxVars.CBTS.MaxNumChasingZombies
+    --MaxNumChasingZombies = SandboxVars.CBTS.MaxNumChasingZombies
     PlayerPositionOffset = SandboxVars.CBTS.PlayerPositionOffset
     SoundType = SandboxVars.CBTS.SoundType
 
@@ -71,49 +71,88 @@ local function CalmPhase()
     if not getPlayer() then return end
 
     if getPlayer():isAlive() and getPlayer() ~= nil then
-
         local CurrentSquare = getPlayer():getCurrentSquare()
+        local PlayerX, PlayerY
+        local x1, y1, x2, y2
 
         if CurrentSquare then
+            -- Make noise and update coordinates
+            PlayerX = CurrentSquare:getX()
+            PlayerY = CurrentSquare:getY()
+            x1 = PlayerX + HordeDistance
+            y1 = PlayerY + HordeDistance
+            x2 = PlayerX - HordeDistance
+            y2 = PlayerY - HordeDistance
 
-            local x1 = CurrentSquare:getX() + HordeDistance
-            local y1 = CurrentSquare:getY() + HordeDistance
-            local x2 = CurrentSquare:getX() - HordeDistance
-            local y2 = CurrentSquare:getY() - HordeDistance
+            if PlayerX ~= nil and PlayerY ~= nil and x1 ~= nil and y1 ~= nil and x2 ~= nil and y2 ~= nil then -- If statement to avoid errors if player coordinates cannot be found
+                if MigrationDirection.North then
+                    MakeNoise(PlayerX, y2, HordeRadius)
+                end
 
-            if MigrationDirection.North then
-                MakeNoise(CurrentSquare:getX(), y2, HordeRadius)
+                if MigrationDirection.South then
+                    MakeNoise(PlayerX, y1, HordeRadius)
+                end
+
+                if MigrationDirection.East then
+                    MakeNoise(x1, PlayerY, HordeRadius)
+                end
+
+                if MigrationDirection.West then
+                    MakeNoise(x2, PlayerY, HordeRadius)
+                end
+
+                if MigrationDirection.NorthEast then
+                    MakeNoise(x1, y2, HordeRadius)
+                end
+
+                if MigrationDirection.SouthEast then
+                    MakeNoise(x1, y1, HordeRadius)
+                end
+
+                if MigrationDirection.NorthWest then
+                    MakeNoise(x2, y2, HordeRadius)
+                end
+
+                if MigrationDirection.SouthWest then
+                    MakeNoise(x2, y1, HordeRadius)
+                end
             end
-
-            if MigrationDirection.South then
-                MakeNoise(CurrentSquare:getX(), y1, HordeRadius)
-            end
-
-            if MigrationDirection.East then
-                MakeNoise(x1, CurrentSquare:getY(), HordeRadius)
-            end
-
-            if MigrationDirection.West then
-                MakeNoise(x2, CurrentSquare:getY(), HordeRadius)
-            end
-
-            if MigrationDirection.NorthEast then
-                MakeNoise(x1, y2, HordeRadius)
-            end
-
-            if MigrationDirection.SouthEast then
-                MakeNoise(x1, y1, HordeRadius)
-            end
-
-            if MigrationDirection.NorthWest then
-                MakeNoise(x2, y2, HordeRadius)
-            end
-
-            if MigrationDirection.SouthWest then
-                MakeNoise(x2, y1, HordeRadius)
-            end
-
         else
+            -- Make noise but don't update coordinates when player square cannot be found.
+            if PlayerX ~= nil and PlayerY ~= nil and x1 ~= nil and y1 ~= nil and x2 ~= nil and y2 ~= nil then
+                if MigrationDirection.North then
+                    MakeNoise(PlayerX, y2, HordeRadius)
+                end
+
+                if MigrationDirection.South then
+                    MakeNoise(PlayerX, y1, HordeRadius)
+                end
+
+                if MigrationDirection.East then
+                    MakeNoise(x1, PlayerY, HordeRadius)
+                end
+
+                if MigrationDirection.West then
+                    MakeNoise(x2, PlayerY, HordeRadius)
+                end
+
+                if MigrationDirection.NorthEast then
+                    MakeNoise(x1, y2, HordeRadius)
+                end
+
+                if MigrationDirection.SouthEast then
+                    MakeNoise(x1, y1, HordeRadius)
+                end
+
+                if MigrationDirection.NorthWest then
+                    MakeNoise(x2, y2, HordeRadius)
+                end
+
+                if MigrationDirection.SouthWest then
+                    MakeNoise(x2, y1, HordeRadius)
+                end
+            end
+
             if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0 and EnableLogging then
                 print(DebugPrefix, "Player CurrentSquare not found. Cancelled calm phase update.")
             end
@@ -144,8 +183,7 @@ local function StormPhase()
         end
 
         if PlayerX ~= nil and PlayerY ~= nil then
-        --if CurrentSquare then
-            if MaxNumChasingZombies > 0 then
+            --[[if MaxNumChasingZombies > 0 then
                 if CurrentSquare and getPlayer():getStats():getNumChasingZombies() < MaxNumChasingZombies then
                     MakeNoise(PlayerX, PlayerY, HordeDistance * 1.5)
                 else
@@ -153,14 +191,9 @@ local function StormPhase()
                         print(DebugPrefix, "MaxNumChasingZombies value reached. Cancelled storm phase update.")
                     end
                 end
-            else
+            else]]
                 MakeNoise(PlayerX, PlayerY, HordeDistance * 1.5)
-            end
-        --[[else
-            if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0 and EnableLogging then
-                print(DebugPrefix, "Player CurrentSquare not found. Cancelled storm phase update.")
-            end
-        end]]
+            --end
         end
 
         if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0 and EnableLogging then
@@ -192,16 +225,20 @@ local function PlayStormSounds()
                 local Sound = getWorld():getFreeEmitter()
                 Sound:setVolume(WindIntensity, 1.0)
                 Sound:setPos(x1, y1, 0)
-                --Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                Sound:setPos(x1 + ZombRand(-5, 1), y1 + ZombRand(-5, 1), 0)
                 Sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
                 Sound:setPos(x2, y1, 0)
-                --Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                Sound:setPos(x1 + ZombRand(-5, 1), y1 + ZombRand(-5, 1), 0)
                 Sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
                 Sound:setPos(x1, y2, 0)
-                --Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                Sound:setPos(x1 + ZombRand(-5, 1), y1 + ZombRand(-5, 1), 0)
                 Sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
                 Sound:setPos(x2, y2, 0)
-                --Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                Sound:playSoundImpl("Wind" .. ZombRand(1, 4), false, nil)
+                Sound:setPos(x1 + ZombRand(-5, 1), y1 + ZombRand(-5, 1), 0)
                 Sound:playSoundImpl("Zombies" .. ZombRand(1, 4), false, nil)
             else
                 print(DebugPrefix, "Player CurrentSquare not found. Cancelled PlayStormSounds().")
@@ -215,7 +252,7 @@ local function PlayStormSounds()
 end
 
 local function CyclePhases()
-	CycleCounter = CBTSData.Data.Counter 
+    CycleCounter = CBTSData.Data.Counter
 
     UpdateSandboxVars()
 
@@ -267,7 +304,6 @@ local function CyclePhases()
     if (CycleCounter)%(DebugMinutesToUpdateConsole) == 0 and EnableLogging then
         print("-----------------------------------------------------------")
     end
-
 end
 
 Events.EveryOneMinute.Add(CyclePhases)
